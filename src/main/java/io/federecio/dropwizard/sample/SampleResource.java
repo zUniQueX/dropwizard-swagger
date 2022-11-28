@@ -17,40 +17,35 @@ package io.federecio.dropwizard.sample;
 
 import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.PrincipalImpl;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
-import io.swagger.annotations.BasicAuthDefinition;
-import io.swagger.annotations.OAuth2Definition;
-import io.swagger.annotations.SecurityDefinition;
-import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.OAuthFlow;
+import io.swagger.v3.oas.annotations.security.OAuthFlows;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.security.SecuritySchemes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Api("/")
 @Path("/")
-@SwaggerDefinition(
-    securityDefinition =
-        @SecurityDefinition(
-            basicAuthDefinitions = {@BasicAuthDefinition(key = "basic")},
-            oAuth2Definitions = {
-              @OAuth2Definition(
-                  flow = OAuth2Definition.Flow.IMPLICIT,
-                  key = "oauth2",
-                  authorizationUrl = "/oauth2/auth")
-            }))
+@SecuritySchemes({
+  @SecurityScheme(type = SecuritySchemeType.HTTP, scheme = "basic"),
+  @SecurityScheme(
+      type = SecuritySchemeType.OAUTH2,
+      flows = @OAuthFlows(implicit = @OAuthFlow(authorizationUrl = "/oauth2/auth")))
+})
 public class SampleResource {
 
   @GET
   @Path("/hello")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Hello", notes = "Returns hello")
-  @ApiResponses(value = {@ApiResponse(code = 200, message = "hello")})
+  @Operation(
+      summary = "Hello",
+      description = "Returns hello",
+      responses = {@ApiResponse(responseCode = "200", description = "hello")})
   public Saying hello() {
     return new Saying("hello");
   }
@@ -58,18 +53,16 @@ public class SampleResource {
   @GET
   @Path("/secret")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(
-      value = "Secret",
-      notes = "Returns secret",
-      authorizations = {@Authorization("basic"), @Authorization("oauth2")})
-  @ApiResponses(
-      value = {
+  @Operation(
+      summary = "Secret",
+      description = "Returns secret",
+      responses = {
+        @ApiResponse(responseCode = "200", description = "secret"),
         @ApiResponse(
-            code = 401,
-            message = "Please enter basic credentials or use oauth2 authentication"),
-        @ApiResponse(code = 200, message = "secret")
+            responseCode = "401",
+            description = "Please enter basic credentials or use oauth2 authentication"),
       })
-  public Saying secret(@ApiParam(hidden = true) @Auth PrincipalImpl user) {
+  public Saying secret(@Parameter(hidden = true) @Auth PrincipalImpl user) {
     return new Saying(String.format("Hi %s! It's a secret message...", user.getName()));
   }
 }

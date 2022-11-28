@@ -46,6 +46,6 @@ public class DefaultServerWithContactTest extends DropwizardTest {
             StringContains.containsString("\"email\":\"test-contact-email@test.com\""),
             StringContains.containsString("\"url\":\"test-url.contact.com\""))
         .when()
-        .get(Path.from(basePath, "swagger.json"));
+        .get(Path.from(basePath, "openapi.json"));
   }
 }

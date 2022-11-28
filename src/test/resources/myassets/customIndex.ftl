@@ -43,7 +43,7 @@
         window.SwaggerTranslator.translate();
       }
       window.swaggerUi = new SwaggerUi({
-        url: "${contextPath}/swagger.json",
+        url: "${contextPath}/openapi.json",
         <#if validatorUrl??>
         validatorUrl: "${validatorUrl}",
         <#else>
