@@ -42,7 +42,7 @@ public class DefaultServerWithSwaggerResourceDisabledTest extends DropwizardComm
         .statusCode(HttpStatus.OK_200)
         .body(StringContains.containsString(TestResource.OPERATION_DESCRIPTION))
         .when()
-        .get(Path.from(basePath, "swagger.json"));
+        .get(Path.from(basePath, "openapi.json"));
     RestAssured.expect()
         .statusCode(HttpStatus.NOT_FOUND_404)
         .when()

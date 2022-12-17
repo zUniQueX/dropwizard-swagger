@@ -43,7 +43,7 @@
 
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
-        url: "${contextPath}/swagger.json",
+        url: "${contextPath}/openapi.json",
         <#if validatorUrl??>
         validatorUrl: "${validatorUrl}",
         <#else>

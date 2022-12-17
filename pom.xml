@@ -30,6 +30,7 @@
 
     <properties>
         <jersey.version>2.35</jersey.version>
+        <swagger.version>2.2.6</swagger.version>        
     </properties>
 
     <name>Dropwizard Swagger support</name>
@@ -94,17 +95,20 @@
             <version>${jersey.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-jersey2-jaxrs</artifactId>
-            <version>1.6.8</version>
-            <!-- Causes runtime issues with jakarta.validation:validation-api in dropwizard-core -->
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.validation</groupId>
-                    <artifactId>validation-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>     
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-integration</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>                    
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -124,7 +128,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

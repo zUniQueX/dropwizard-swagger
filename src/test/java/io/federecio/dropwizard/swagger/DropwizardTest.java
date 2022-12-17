@@ -44,7 +44,7 @@ public abstract class DropwizardTest extends DropwizardCommonTest {
         .statusCode(HttpStatus.OK_200)
         .body(StringContains.containsString(TestResource.OPERATION_DESCRIPTION))
         .when()
-        .get(Path.from(basePath, "swagger.json"));
+        .get(Path.from(basePath, "openapi.json"));
     RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(Path.from(basePath, "swagger"));
     RestAssured.expect()
         .statusCode(HttpStatus.OK_200)
