@@ -141,7 +141,9 @@ public class SwaggerView extends View {
     return viewConfiguration.isShowApiSelector();
   }
 
-  /** @return {@link SwaggerOAuth2Configuration} containing every properties to init oauth2 */
+  /**
+   * @return {@link SwaggerOAuth2Configuration} containing every properties to init oauth2
+   */
   public SwaggerOAuth2Configuration getOauth2Configuration() {
     return oauth2Configuration;
   }

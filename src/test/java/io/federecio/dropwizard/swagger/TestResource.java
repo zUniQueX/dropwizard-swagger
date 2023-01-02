@@ -36,7 +36,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-/** @author Federico Recio */
+/**
+ * @author Federico Recio
+ */
 @Path("/test.json")
 @OpenAPIDefinition(servers = {@Server(url = "/test")})
 public class TestResource {

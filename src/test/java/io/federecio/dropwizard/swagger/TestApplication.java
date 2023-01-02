@@ -31,7 +31,9 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-/** @author Federico Recio */
+/**
+ * @author Federico Recio
+ */
 public class TestApplication extends Application<TestConfiguration> {
 
   @Override
