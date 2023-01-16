@@ -46,7 +46,7 @@ import javax.validation.constraints.NotEmpty;
  * SwaggerConfiguration}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SwaggerBundleConfiguration {
+public class SwaggerBundleConfiguration implements Cloneable {
 
   /**
    * This is the only property that is required for Swagger to work correctly.
@@ -221,23 +221,23 @@ public class SwaggerBundleConfiguration {
 
   @JsonProperty
   public SwaggerViewConfiguration getSwaggerViewConfiguration() {
-    return swaggerViewConfiguration;
+    return swaggerViewConfiguration.clone();
   }
 
   @JsonProperty
   public void setSwaggerViewConfiguration(final SwaggerViewConfiguration swaggerViewConfiguration) {
-    this.swaggerViewConfiguration = swaggerViewConfiguration;
+    this.swaggerViewConfiguration = swaggerViewConfiguration.clone();
   }
 
   @JsonProperty
   public SwaggerOAuth2Configuration getSwaggerOAuth2Configuration() {
-    return swaggerOAuth2Configuration;
+    return swaggerOAuth2Configuration.clone();
   }
 
   @JsonProperty("oauth2")
   public void setSwaggerOAuth2Configuration(
       final SwaggerOAuth2Configuration swaggerOAuth2Configuration) {
-    this.swaggerOAuth2Configuration = swaggerOAuth2Configuration;
+    this.swaggerOAuth2Configuration = swaggerOAuth2Configuration.clone();
   }
 
   @JsonProperty
@@ -347,5 +347,18 @@ public class SwaggerBundleConfiguration {
         .readAllResources(readAllResources)
         .ignoredRoutes(Arrays.stream(exclusions).collect(Collectors.toSet()))
         .resourcePackages(Arrays.stream(resourcePackage.split(",")).collect(Collectors.toSet()));
+  }
+
+  @Override
+  public SwaggerBundleConfiguration clone() {
+    try {
+      SwaggerBundleConfiguration clone = (SwaggerBundleConfiguration) super.clone();
+      clone.setSwaggerViewConfiguration(this.swaggerViewConfiguration);
+      clone.setSwaggerOAuth2Configuration(this.swaggerOAuth2Configuration);
+      clone.schemes = this.schemes.clone();
+      return clone;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 }

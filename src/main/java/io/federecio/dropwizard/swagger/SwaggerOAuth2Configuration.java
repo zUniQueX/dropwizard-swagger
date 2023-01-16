@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 
 /** For the meaning of all these properties please refer to Swagger UI documentation */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SwaggerOAuth2Configuration {
+public class SwaggerOAuth2Configuration implements Cloneable {
 
   @Nullable private String clientId;
 
@@ -94,10 +94,21 @@ public class SwaggerOAuth2Configuration {
   }
 
   public Map<String, String> getAdditionalQueryStringParams() {
-    return additionalQueryStringParams;
+    return Maps.newHashMap(additionalQueryStringParams);
   }
 
   public void setAdditionalQueryStringParams(Map<String, String> additionalQueryStringParams) {
-    this.additionalQueryStringParams = additionalQueryStringParams;
+    this.additionalQueryStringParams = Maps.newHashMap(additionalQueryStringParams);
+  }
+
+  @Override
+  public SwaggerOAuth2Configuration clone() {
+    try {
+      SwaggerOAuth2Configuration clone = (SwaggerOAuth2Configuration) super.clone();
+      clone.setAdditionalQueryStringParams(this.additionalQueryStringParams);
+      return clone;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 }

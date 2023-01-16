@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
  * Contains all configurable parameters required to render the SwaggerUI View from the default
  * template
  */
-public class SwaggerViewConfiguration {
+public class SwaggerViewConfiguration implements Cloneable {
 
   private static final String DEFAULT_TITLE = "Swagger UI";
   private static final String DEFAULT_TEMPLATE = "index.ftl";
@@ -95,5 +95,15 @@ public class SwaggerViewConfiguration {
 
   public void setShowAuth(boolean showAuth) {
     this.showAuth = showAuth;
+  }
+
+  @Override
+  public SwaggerViewConfiguration clone() {
+    try {
+      SwaggerViewConfiguration clone = (SwaggerViewConfiguration) super.clone();
+      return clone;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 }
