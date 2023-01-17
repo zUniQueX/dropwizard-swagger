@@ -49,9 +49,17 @@ public class ConfigurationHelper {
    * @param swaggerBundleConfiguration Bundle Configuration
    */
   public ConfigurationHelper(
-      Configuration configuration, SwaggerBundleConfiguration swaggerBundleConfiguration) {
-    this.configuration = configuration;
-    this.swaggerBundleConfiguration = swaggerBundleConfiguration;
+      final Configuration configuration,
+      final SwaggerBundleConfiguration swaggerBundleConfiguration) {
+    this.configuration = new Configuration();
+    this.configuration.setAdminFactory(configuration.getAdminFactory());
+    if (configuration.getHealthFactory().isPresent()) {
+      this.configuration.setHealthFactory(configuration.getHealthFactory().get());
+    }
+    this.configuration.setLoggingFactory(configuration.getLoggingFactory());
+    this.configuration.setServerFactory(configuration.getServerFactory());
+    this.configuration.setMetricsFactory(configuration.getMetricsFactory());
+    this.swaggerBundleConfiguration = swaggerBundleConfiguration.clone();
   }
 
   public String getJerseyRootPath() {

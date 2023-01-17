@@ -39,7 +39,7 @@ public class OAuth2Resource {
   private final SwaggerOAuth2Configuration oAuth2Configuration;
 
   public OAuth2Resource(SwaggerOAuth2Configuration oAuth2Configuration) {
-    this.oAuth2Configuration = oAuth2Configuration;
+    this.oAuth2Configuration = oAuth2Configuration.clone();
   }
 
   @GET

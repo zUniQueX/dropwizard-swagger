@@ -28,6 +28,6 @@ public class SampleConfiguration extends Configuration {
 
   @JsonProperty("swagger")
   public SwaggerBundleConfiguration getSwagger() {
-    return swagger;
+    return swagger.clone();
   }
 }

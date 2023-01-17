@@ -68,8 +68,8 @@ public class SwaggerView extends View {
 
     contextPath = urlPattern.equals("/") ? contextRootPrefix : (contextRootPrefix + urlPattern);
 
-    this.viewConfiguration = viewConfiguration;
-    this.oauth2Configuration = oauth2Configuration;
+    this.viewConfiguration = viewConfiguration.clone();
+    this.oauth2Configuration = oauth2Configuration.clone();
 
     this.customJavascriptPath = customJavascriptPath;
   }
@@ -145,6 +145,6 @@ public class SwaggerView extends View {
    * @return {@link SwaggerOAuth2Configuration} containing every properties to init oauth2
    */
   public SwaggerOAuth2Configuration getOauth2Configuration() {
-    return oauth2Configuration;
+    return oauth2Configuration.clone();
   }
 }

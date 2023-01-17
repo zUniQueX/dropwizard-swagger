@@ -46,22 +46,22 @@ public class SwaggerResource {
 
   public SwaggerResource(
       String urlPattern,
-      SwaggerViewConfiguration viewConfiguration,
-      SwaggerOAuth2Configuration oAuth2Configuration) {
+      final SwaggerViewConfiguration viewConfiguration,
+      final SwaggerOAuth2Configuration oAuth2Configuration) {
     this.urlPattern = urlPattern;
-    this.viewConfiguration = viewConfiguration;
-    this.oAuth2Configuration = oAuth2Configuration;
+    this.viewConfiguration = viewConfiguration.clone();
+    this.oAuth2Configuration = oAuth2Configuration.clone();
     this.contextRoot = "/";
     this.customJavascriptPath = null;
   }
 
   public SwaggerResource(
       String urlPattern,
-      SwaggerViewConfiguration viewConfiguration,
-      SwaggerOAuth2Configuration oAuth2Configuration,
+      final SwaggerViewConfiguration viewConfiguration,
+      final SwaggerOAuth2Configuration oAuth2Configuration,
       String contextRoot) {
-    this.viewConfiguration = viewConfiguration;
-    this.oAuth2Configuration = oAuth2Configuration;
+    this.viewConfiguration = viewConfiguration.clone();
+    this.oAuth2Configuration = oAuth2Configuration.clone();
     this.urlPattern = urlPattern;
     this.contextRoot = contextRoot;
     this.customJavascriptPath = null;
@@ -69,12 +69,12 @@ public class SwaggerResource {
 
   public SwaggerResource(
       String urlPattern,
-      SwaggerViewConfiguration viewConfiguration,
-      SwaggerOAuth2Configuration oAuth2Configuration,
+      final SwaggerViewConfiguration viewConfiguration,
+      final SwaggerOAuth2Configuration oAuth2Configuration,
       String contextRoot,
       String customJavascriptPath) {
-    this.viewConfiguration = viewConfiguration;
-    this.oAuth2Configuration = oAuth2Configuration;
+    this.viewConfiguration = viewConfiguration.clone();
+    this.oAuth2Configuration = oAuth2Configuration.clone();
     this.urlPattern = urlPattern;
     this.contextRoot = contextRoot;
     this.customJavascriptPath = customJavascriptPath;
