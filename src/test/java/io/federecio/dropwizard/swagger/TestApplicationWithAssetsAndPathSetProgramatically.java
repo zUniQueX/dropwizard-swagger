@@ -28,7 +28,7 @@
 package io.federecio.dropwizard.swagger;
 
 import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.core.setup.Bootstrap;
 
 public class TestApplicationWithAssetsAndPathSetProgramatically
     extends TestApplicationWithPathSetProgramatically {
